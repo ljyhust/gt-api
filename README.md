@@ -1,21 +1,4 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/xxl-logo.jpg" width="150">
-    <h3 align="center">XXL-API</h3>
-    <p align="center">
-        XXL-API, a api management platform.
-        <br>
-        <a href="http://www.xuxueli.com/xxl-api/"><strong>-- Home Page --</strong></a>
-        <br>
-        <br>
-         <a href="https://github.com/xuxueli/xxl-api/releases">
-             <img src="https://img.shields.io/github/release/xuxueli/xxl-api.svg" >
-         </a>
-         <a href="http://www.gnu.org/licenses/gpl-3.0.html">
-             <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" >
-         </a>
-    </p>    
-</p>
-
+## 基于xxl项目改造，自动生成Api接口文档
 ## Introduction
 XXL-API is a simple and easy-to-use API management platform that provides "management", "documentation", "Mock", and "test" functions for the API. Open source code, out-of-the-box.
 
