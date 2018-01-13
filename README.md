@@ -15,21 +15,7 @@ XXL-API是一个简洁易用API管理平台，提供API的"管理"、"文档"、
 - 8、Mock：支持为API定义Mock数据并制定数据响应格式，从而快速提供Mock接口，加快开发进度；
 - 9、在线测试：支持在线对API进行测试并保存测试数据，提供接口测试效率；
 
-## Documentation
-- [中文文档](http://www.xuxueli.com/xxl-api/)
 
-
-## Communication
-
-- [社区交流](http://www.xuxueli.com/page/community.html)
-
-## Contributing
-Contributions are welcome! Open a pull request to fix a bug, or open an [Issue](https://github.com/xuxueli/xxl-api/issues/) to discuss a new feature or change.
-
-欢迎参与项目贡献！比如提交PR修复一个bug，或者新建 [Issue](https://github.com/xuxueli/xxl-api/issues/) 讨论新特性或者变更。
-
-## 接入登记
-更多接入的公司，欢迎在 [登记地址](https://github.com/xuxueli/xxl-api/issues/1 ) 登记，登记仅仅为了产品推广。
 
 ## Copyright and License
 This product is open source and free, and will continue to provide free community technical support. Individual or enterprise users are free to access and use.
@@ -41,10 +27,3 @@ This product is open source and free, and will continue to provide free communit
 
 ## Donate
 No matter how much the amount is enough to express your thought, thank you very much ：）
-
-无论金额多少都足够表达您这份心意，非常感谢 ：）    [XXL系列捐赠记录](http://www.xuxueli.com/page/donate.html )
-
-微信：<img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/donate-wechat.png" width="200">
-支付宝：<img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/donate-alipay.jpg" width="200">
-
-测试：基于xxl api管理平台改造
