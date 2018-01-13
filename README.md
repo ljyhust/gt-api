@@ -63,3 +63,5 @@ No matter how much the amount is enough to express your thought, thank you very 
 
 微信：<img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/donate-wechat.png" width="200">
 支付宝：<img src="https://raw.githubusercontent.com/xuxueli/xxl-job/master/doc/images/donate-alipay.jpg" width="200">
+
+测试：基于xxl api管理平台改造
