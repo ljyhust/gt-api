@@ -156,6 +156,12 @@ public class XxlApiDocumentController {
 		int ret = xxlApiDocumentDao.update(xxlApiDocument);
 		return (ret>0)?ReturnT.SUCCESS:ReturnT.FAIL;
 	}
+	
+	@RequestMapping("/pubApiDoc")
+	@ResponseBody
+	public ReturnT<String> pubSpecifiedApiDoc() {
+		return ReturnT.SUCCESS;
+	}
 
 	/**
 	 * 详情页，API

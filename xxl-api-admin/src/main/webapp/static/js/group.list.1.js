@@ -164,7 +164,71 @@ $(function() {
 		});
 
 	});
-
+	
+	$("#pubApi").click(function(){
+		$('#pubApiModal').modal({backdrop: false, keyboard: false}).modal('show');
+	});
+	
+	var pubApiModalValidate = $("#pubApiModal .form").validate({
+		errorElement : 'span',
+		errorClass : 'help-block',
+		focusInvalid : true,
+		rules : {
+			apiName : {
+				required : true,
+				minlength: 2,
+				maxlength: 12
+			},
+			requestUrl : {
+				required : true,
+				minlength: 2,
+				maxlength: 100
+			}
+		},
+		messages : {
+			apiName : {
+				required :"请输入“接口名称”",
+				minlength: "长度不可少于2",
+				maxlength: "长度不可多余12"
+			},
+			requestUrl : {
+				required :"请输入“接口URL”",
+				minlength: "长度不可少于2",
+				maxlength: "长度不可多余100"
+			}
+		},
+		highlight : function(element) {
+			$(element).closest('.form-group').addClass('has-error');
+		},
+		success : function(label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
+		},
+		errorPlacement : function(error, element) {
+			element.parent('div').append(error);
+		},
+		submitHandler : function(form) {
+			$.post(base_url + "/document/pubApiDoc",  $("#pubApiModal .form").serialize(), function(data, status) {
+				if (data.code == "200") {
+					$('#pubApiModal').modal('hide');
+					setTimeout(function () {
+						ComAlert.show(1, "发布成功", function(){
+							window.location.reload();
+						});
+					}, 315);
+				} else {
+					ComAlert.show(2, (data.msg || "发布失败") );
+				}
+			});
+		}
+	});
+	$("#pubApiModal").on('hide.bs.modal', function () {
+		$("#pubApiModal .form")[0].reset();
+		addGroupModalValidate.resetForm();
+		$("#pubApiModal .form .form-group").removeClass("has-error");
+		$(".remote_panel").show();	// remote
+	});
+	
 	/**
 	 * 关键字搜索
 	 */

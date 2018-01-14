@@ -1,5 +1,6 @@
 package com.xxl.api.admin.controller;
 
+import com.xxl.api.admin.core.consistant.RequestConfig;
 import com.xxl.api.admin.core.model.ReturnT;
 import com.xxl.api.admin.core.model.XxlApiDocument;
 import com.xxl.api.admin.core.model.XxlApiGroup;
@@ -7,6 +8,7 @@ import com.xxl.api.admin.core.model.XxlApiProject;
 import com.xxl.api.admin.dao.IXxlApiDocumentDao;
 import com.xxl.api.admin.dao.IXxlApiGroupDao;
 import com.xxl.api.admin.dao.IXxlApiProjectDao;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+
 import java.util.List;
 
 /**
@@ -61,6 +64,7 @@ public class XxlApiGroupController {
 		}
 		model.addAttribute("groupId", groupId);
 		model.addAttribute("groupInfo", groupInfo);
+		model.addAttribute("RequestMethodEnum", RequestConfig.RequestMethodEnum.values());
 
 		// 分组下的，接口列表
 		List<XxlApiDocument> documentList = xxlApiDocumentDao.loadAll(productId, groupId);
