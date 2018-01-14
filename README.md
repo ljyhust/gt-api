@@ -1,8 +1,10 @@
-## 基于xxl项目改造，自动生成Api接口文档
+## 基于xxl项目改造，自动生成Api接口文档GT-API
+- 基于Spring添加自动生成接口MD文档功能；
+- 支持代码更改后，接口同步自动生成
 ## Introduction
-XXL-API is a simple and easy-to-use API management platform that provides "management", "documentation", "Mock", and "test" functions for the API. Open source code, out-of-the-box.
+GT-API is a simple and easy-to-use API management platform that provides "management", "documentation", "Mock", and "test" functions for the API. Open source code, out-of-the-box.
 
-XXL-API是一个简洁易用API管理平台，提供API的"管理"、"文档"、"Mock"和"测试"等功能。现已开放源代码，开箱即用。
+GT-API是一个简洁易用API管理平台，提供API的"管理"、"文档"、"Mock"和"测试"等功能。现已开放源代码，开箱即用。
 
 ## Features
 - 1、极致简单：交互简洁，一分钟上手；
