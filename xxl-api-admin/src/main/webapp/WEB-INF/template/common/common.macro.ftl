@@ -81,7 +81,7 @@
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
 				<li class="header">常用模块</li>
-				<li class="nav-click <#if pageName == "projectList">active</#if>" ><a href="${request.contextPath}/gt-document"><i class="fa fa-circle-o text-red"></i> <span>文档管理</span></a></li>
+				<!-- <li class="nav-click <#if pageName == "documentList">active</#if>" ><a href="${request.contextPath}/gt-document"><i class="fa fa-circle-o text-red"></i> <span>文档管理</span></a></li> -->
 				<li class="nav-click <#if pageName == "projectList">active</#if>" ><a href="${request.contextPath}/project"><i class="fa fa-circle-o text-red"></i> <span>项目管理</span></a></li>
                 <li class="nav-click <#if pageName == "datatype">active</#if>" ><a href="${request.contextPath}/datatype"><i class="fa fa-circle-o text-red"></i> <span>数据类型管理</span></a></li>
 				<#if XXL_API_LOGIN_IDENTITY.type == 1>

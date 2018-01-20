@@ -116,6 +116,12 @@ CREATE TABLE `xxl_api_user_permission` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+create table `gt_document_des` (
+	`id` double ,
+	`doc_name` varchar (384),
+	`doc_content` blob ,
+	`project_id` double 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 INSERT INTO `xxl_api_user` VALUES ('1', 'admin', '123456', '1', '管理员');
 

@@ -24,12 +24,12 @@
 
         <section class="content">
             <div class="row">
-                <!-- 接口分组 -->
+                <!-- 文档目录，根据项目分文档，点击一下右边就展示文档内容 -->
                 <div class="col-md-3">
                     <a class="btn btn-primary btn-block margin-bottom">${project.name}</a>
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title">接口分组</h3>
+                            <h3 class="box-title">文档目录</h3>
 
                             <div class="box-tools">
                                 <button type="button" class="btn btn-box-tool" id="addGroup" ><i class="fa fa-plus"></i></button>
@@ -50,11 +50,11 @@
                                         <#--<span class="label label-primary pull-right">12</span>-->
                                     </a>
                                 </li>
-                                <#if groupList?exists && groupList?size gt 0>
-                                    <#list groupList as group>
-                                        <li <#if groupId == group.id >class="active"</#if> groupId="${group.id}" >
-                                            <a href="${request.contextPath}/group?productId=${productId}&groupId=${group.id}" >
-                                                <i class="fa fa-inbox"></i>${group.name}
+                                <#if docCatalogList?exists && docCatalogList?size gt 0>
+                                    <#list docCatalogList as docCatalog>
+                                        <li <#if docCatalogId == docCatalog.id >class="active"</#if> docCatalogId="${docCatalog.id}" >
+                                            <a href="${request.contextPath}/group?productId=${productId}&docCatalogId=${docCatalog.id}" >
+                                                <i class="fa fa-inbox"></i>${docCatalog.name}
                                                 <#--<span class="label label-primary pull-right">12</span>-->
                                             </a>
                                         </li>

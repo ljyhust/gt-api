@@ -60,12 +60,13 @@ $(function() {
 			},
 			{
 				"data": '操作' ,
-				"width":'10%',
+				"width":'20%',
 				"render": function ( data, type, row ) {
 					return function(){
 
 						// 详情页
 						var goUrl = base_url + '/group?productId='+ row.id;
+						var docUrl = base_url + '/gt-document?productId='+ row.id;
 
 						// html
 						var html = '<span id="'+ row.id +'" '+
@@ -79,7 +80,8 @@ $(function() {
 								'>'+
 							'<button class="btn btn-warning btn-xs update" type="button">编辑</button>  '+
 							'<button class="btn btn-danger btn-xs delete" type="button">删除</button>  <br>'+
-							'<button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open(\'' + goUrl + '\')" >进入项目</button>  '+
+							'<button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open(\'' + goUrl + '\')" >接口管理</button>  '+
+							'<button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open(\'' + docUrl + '\')" >文档管理</button>  '+
 							'</span>';
 
 						return html;
