@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GtDocumentDesMapper">
+	
+	<resultMap id="GtDocumentDes" type="com.xxl.api.admin.core.model.GtDocumentDes" >
+		<result column="id" property="id" />
+		<result column="docTitle" property="doc_title" />
+	    <result column="docContent" property="doc_content" />
+	    <result column="projectId" property="project_id" />
+	    <result column="status" property="status" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id,
+		t.docTitle,
+		t.projectId
+	</sql>
+
+	<insert id="add" parameterType="com.xxl.api.admin.core.model.GtDocumentDes" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO gt_document_des (
+			`doc_title`,
+			`doc_content`,
+			`project_id`
+	<if test="status != null and status == false">
+			,`status`
+	</if>
+		) VALUES (
+			#{docTitle},
+			#{docContent},
+			#{projectId}
+	<if test="status != null and status == false">
+			,0
+	</if>
+		);
+	</insert>
+
+	<update id="update" parameterType="com.xxl.api.admin.core.model.GtDocumentDes" >
+		UPDATE gt_document_des 
+		SET
+			`doc_title` = #{docTitle},
+			`doc_content` = #{docContent} 
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Integer" >
+		DELETE FROM gt_document_des 
+		WHERE id = #{id}
+	</delete>
+
+	<select id="loadAll" parameterType="java.lang.Integer" resultMap="GtDocumentDes">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_api_biz AS t 
+		ORDER BY t.order ASC
+	</select>
+	
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="GtDocumentDes">
+	   SELECT doc_title, doc_content 
+	   FROM gt_document_des 
+	   WHERE id=#{id} AND status=1
+	</select>
+	
+	<select id="getContensByProject" parameterType="java.lang.Integer" resultMap="GtDocumentDes">
+	   SELECT id,doc_title 
+	   FROM gt_document_des 
+	   WHERE project_id=#{project_id} AND status=1
+	</select>
+
+</mapper>

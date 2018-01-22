@@ -59,7 +59,7 @@
                                 <#if docCatalogList?exists && docCatalogList?size gt 0>
                                     <#list docCatalogList as docCatalog>
                                         <li <#if docCatalogId == docCatalog.id >class="active"</#if> docCatalogId="${docCatalog.id}" >
-                                            <a href="${request.contextPath}/gt-document?productId=${productId}&docCatalogId=${docCatalog.id}" >
+                                            <a href="${request.contextPath}/gt-document/docEdit?productId=${productId}&docCatalogId=${docCatalog.id}" >
                                                 <i class="fa fa-inbox"></i>${docCatalog.docTitle}
                                                 <#--<span class="label label-primary pull-right">12</span>-->
                                             </a>
@@ -181,7 +181,7 @@
 </div>
 
 <!-- 新增-文档.模态框 -->
-<div class="modal fade" id="addDocModal" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -190,8 +190,8 @@
             <div class="modal-body">
                 <form class="form-horizontal form" role="form" >
                     <div class="form-group">
-                        <label for="lastname" class="col-sm-2 control-label">文档标题<font color="red">*</font></label>
-                        <div class="col-sm-10"><input type="text" class="form-control" name="docTitle" placeholder="请文档“文档名称”" maxlength="32" ></div>
+                        <label for="lastname" class="col-sm-2 control-label">文档名称<font color="red">*</font></label>
+                        <div class="col-sm-10"><input type="text" class="form-control" name="name" placeholder="请文档“文档名称”" maxlength="32" ></div>
                     </div>
                     <!-- 
                     <div class="form-group">
