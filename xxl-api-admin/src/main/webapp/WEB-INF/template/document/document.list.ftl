@@ -30,55 +30,61 @@
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <h3 class="box-title">文档目录</h3>
-
+                            <input type="hidden" name="projectId" value="${productId}" >
                             <div class="box-tools">
                                 <button type="button" class="btn btn-box-tool" id="addDoc" ><i class="fa fa-plus"></i></button>
                             </div>
 
                         </div>
-                        <div class="box-body no-padding">
+                        <div id="contentsTree"></div>
+                        <#--<div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
                                 <!-- 
                                 <li <#if groupId == -1>class="active"</#if> groupId="-1" >
                                     <a href="${request.contextPath}/gt-document?productId=${productId}&groupId=-1" >
                                         <i class="fa fa-inbox"></i>全部
-                                 -->
-                                        <#--<span class="label label-primary pull-right">12</span>-->
+                                 &ndash;&gt;
+                                        &lt;#&ndash;<span class="label label-primary pull-right">12</span>&ndash;&gt;
                                 <!-- 
                                     </a>
                                 </li>
                                 <li <#if groupId == 0>class="active"</#if> groupId="0" >
                                     <a href="${request.contextPath}/group?productId=${productId}&groupId=0" >
                                         <i class="fa fa-inbox"></i>默认分组
-                                 -->
-                                        <#--<span class="label label-primary pull-right">12</span>-->
+                                 &ndash;&gt;
+                                        &lt;#&ndash;<span class="label label-primary pull-right">12</span>&ndash;&gt;
                                  <!-- 
                                     </a>
                                 </li>
-                                 -->
+                                 &ndash;&gt;
                                 <#if docCatalogList?exists && docCatalogList?size gt 0>
                                     <#list docCatalogList as docCatalog>
                                         <li <#if docCatalogId == docCatalog.id >class="active"</#if> docCatalogId="${docCatalog.id}" >
                                             <a href="${request.contextPath}/gt-document?productId=${productId}&docCatalogId=${docCatalog.id}" >
                                                 <i class="fa fa-inbox"></i>${docCatalog.docTitle}
-                                                <#--<span class="label label-primary pull-right">12</span>-->
+                                                &lt;#&ndash;<span class="label label-primary pull-right">12</span>&ndash;&gt;
                                             </a>
                                         </li>
                                     </#list>
                                 </#if>
                             </ul>
-                        </div>
+                        </div>-->
                         <!-- /.box-body -->
                     </div>
-
                 </div>
                 <!-- /.col -->
                 
                 <#--文档内容-->
                 <div class="col-md-9">
                     <div class="box box-primary">
+                        <#-- 标题 -->
+                        <div id="apidoc-name"><h3 style="text-align: center"><font face="微软雅黑"></font></h3></div>
+                        <#-- 内容 -->
+                        <div id="apidoc-md-view">
+                            <textarea style="display:none;" name="apidoc-md-markdown-doc"></textarea>
+                        </div>
                         <#--标题栏-->
-                        <div class="box-header with-border">
+                        <#--<div class="box-header with-border">
                             <h3 class="box-title">
                                 <#if groupId==-1>全部
                                 <#elseif groupId==0>默认分组
@@ -95,7 +101,7 @@
                             </#if>
                             
                             <button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open('${request.contextPath}/document/addPage?productId=${productId}')" >+新增接口</button>
-                            <!-- 发布接口 -->
+                            <!-- 发布接口 &ndash;&gt;
                             <button class="btn btn-info btn-xs" type="button" id="pubApi">+发布接口</button>
                             &nbsp;&nbsp;
                             共<#if documentList?exists>${documentList?size}<#else>0</#if>个接口
@@ -109,7 +115,7 @@
                         </div>
 
                         <div class="box-body no-padding">
-                            <#--接口列表-->
+                            &lt;#&ndash;接口列表&ndash;&gt;
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped" id="documentList" >
                                     <thead>
@@ -161,9 +167,9 @@
                                         </#if>
                                     </tbody>
                                 </table>
-                                <!-- /.table -->
+                                <!-- /.table &ndash;&gt;
                             </div>
-                        </div>
+                        </div>-->
 
                     </div>
                     <!-- /. box -->

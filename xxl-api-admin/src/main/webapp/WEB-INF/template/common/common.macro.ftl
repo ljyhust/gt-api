@@ -33,6 +33,7 @@
 	<script src="${request.contextPath}/static/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<!-- Bootstrap 3.3.5 -->
 	<script src="${request.contextPath}/static/adminlte/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${request.contextPath}/static/adminlte/bootstrap/js/bootstrap-treeview.js" />
 	<!-- FastClick -->
 	<script src="${request.contextPath}/static/adminlte/plugins/fastclick/fastclick.min.js"></script>
 	<!-- AdminLTE App -->
