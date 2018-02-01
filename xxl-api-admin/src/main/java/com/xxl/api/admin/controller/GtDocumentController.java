@@ -66,4 +66,9 @@ public class GtDocumentController {
         model.addAttribute("docCatalogList", docList);
         return "document/doc.edit";
     }
+
+    @RequestMapping("/getContents")
+    public String getContents(@RequestParam String projectId) {
+        return "";
+    }
 }

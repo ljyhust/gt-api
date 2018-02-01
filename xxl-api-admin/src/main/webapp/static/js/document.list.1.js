@@ -9,7 +9,7 @@ $(function() {
 		$.ajax({
 			url : base_url +　"/gt-document/getContents",
 			type : "post",
-			data : "",
+			data : {"projectId":projectId},
 			success : function(resData){
 				console.log(resData);
                 $('#contentsTree').treeview({
@@ -38,17 +38,17 @@ $(function() {
             },
             function(markdown) {
                 $('#apidoc-name h3 font').text(markdown.data[0].name);
-                	editormdView = editormd.markdownToHTML("apidoc-md-view", {
-                    markdown        : markdown.data[0].pageContext ,//+ "\r\n" + $("#append-test").text(),
-                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                    tocm            : true,    // Using [TOCM]
-                    emoji           : true,
-                    taskList        : true,
-                    tex             : true,  // 默认不解析
-                    flowChart       : true,  // 默认不解析
-                    sequenceDiagram : true,  // 默认不解析
-                });
-            });
+				editormdView = editormd.markdownToHTML("apidoc-md-view", {
+					markdown        : markdown.data[0].pageContext ,//+ "\r\n" + $("#append-test").text(),
+					htmlDecode      : "style,script,iframe",  // you can filter tags decode
+					tocm            : true,    // Using [TOCM]
+					emoji           : true,
+					taskList        : true,
+					tex             : true,  // 默认不解析
+					flowChart       : true,  // 默认不解析
+					sequenceDiagram : true,  // 默认不解析
+				});
+			});
 	}
 
 	/**
