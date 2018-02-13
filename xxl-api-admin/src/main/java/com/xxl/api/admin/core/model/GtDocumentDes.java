@@ -20,6 +20,8 @@ public class GtDocumentDes implements Serializable{
     
     private Integer projectId;
     
+    private String projectName;
+    
     private Boolean status;
 
     public Integer getId() {
@@ -54,7 +56,15 @@ public class GtDocumentDes implements Serializable{
         this.projectId = projectId;
     }
 
-    public Boolean getStatus() {
+    public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public Boolean getStatus() {
         return status;
     }
 

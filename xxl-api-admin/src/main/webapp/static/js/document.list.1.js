@@ -2,55 +2,7 @@ $(function() {
 
 	apiContentShow($("#projectId").val());
 
-    /**
-	 * ajax请求接口文档
-     */
-	var apiContentShow = function(projectId){
-		$.ajax({
-			url : base_url +　"/gt-document/getContents",
-			type : "post",
-			data : {"projectId":projectId},
-			success : function(resData){
-				console.log(resData);
-                $('#contentsTree').treeview({
-                    color: "#428bca",
-                    //enableLinks: true,
-                    showBorder: false,
-                    data: resData,
-                    levels: nodeLevel,
-                    onNodeSelected : function(event, node){
-                        if (null == node.nodes) {  //叶子节点
-                            //删除之前的div缓存
-                            $('#apidoc-md-view').empty();
-                            //currentId = node.id;
-                            apiView(node.id);
-                        }
-                    }
-                });
-			}
-		});
-	}
-
-	var apiView = function(id){
-        $.get( baseUrl + "/gt-document/queryApiHtml",
-            {
-                id : id
-            },
-            function(markdown) {
-                $('#apidoc-name h3 font').text(markdown.data[0].name);
-				editormdView = editormd.markdownToHTML("apidoc-md-view", {
-					markdown        : markdown.data[0].pageContext ,//+ "\r\n" + $("#append-test").text(),
-					htmlDecode      : "style,script,iframe",  // you can filter tags decode
-					tocm            : true,    // Using [TOCM]
-					emoji           : true,
-					taskList        : true,
-					tex             : true,  // 默认不解析
-					flowChart       : true,  // 默认不解析
-					sequenceDiagram : true,  // 默认不解析
-				});
-			});
-	}
-
+    
 	/**
 	 * 新增，分组
 	 */
@@ -375,3 +327,53 @@ $(function() {
 	*/
 
 });
+
+/**
+ * ajax请求接口文档
+ */
+var apiContentShow = function(projectId){
+	$.ajax({
+		url : base_url+"/gt-document/getDocIndex",
+		type : "post",
+		data : {"projectId":projectId},
+		success : function(resData){
+			console.log(resData);
+            $('#contentsTree').treeview({
+                color: "#428bca",
+                //enableLinks: true,
+                showBorder: false,
+                data: resData,
+                //levels: nodeLevel,
+                onNodeSelected : function(event, node){
+                    if (null == node.nodes) {  //叶子节点
+                        //删除之前的div缓存
+                        $('#apidoc-md-view').empty();
+                        //currentId = node.id;
+                        apiView(node.id);
+                    }
+                }
+            });
+		}
+	});
+}
+
+var apiView = function(id){
+    $.get( baseUrl + "/gt-document/queryApiHtml",
+        {
+            id : id
+        },
+        function(markdown) {
+            $('#apidoc-name h3 font').text(markdown.data[0].name);
+			editormdView = editormd.markdownToHTML("apidoc-md-view", {
+				markdown        : markdown.data[0].pageContext ,//+ "\r\n" + $("#append-test").text(),
+				htmlDecode      : "style,script,iframe",  // you can filter tags decode
+				tocm            : true,    // Using [TOCM]
+				emoji           : true,
+				taskList        : true,
+				tex             : true,  // 默认不解析
+				flowChart       : true,  // 默认不解析
+				sequenceDiagram : true,  // 默认不解析
+			});
+		});
+}
+

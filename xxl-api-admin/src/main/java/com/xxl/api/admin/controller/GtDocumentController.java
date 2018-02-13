@@ -1,6 +1,11 @@
 package com.xxl.api.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -8,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxl.api.admin.core.model.GtDocumentDes;
 import com.xxl.api.admin.core.model.XxlApiProject;
 import com.xxl.api.admin.dao.GtDocumentDesDao;
 import com.xxl.api.admin.dao.IXxlApiProjectDao;
+import com.xxl.api.admin.dto.ApiDocIndexNodeDto;
+import com.xxl.api.admin.dto.GtDocumentRequestDto;
 
 /**
  * 文档管理
@@ -49,6 +57,53 @@ public class GtDocumentController {
         return "document/document.list";
     }
     
+    /**
+     * 获取文档目录
+     * @param docReqDto
+     * @return
+     */
+    @RequestMapping("getDocIndex")
+    @ResponseBody
+    public List<ApiDocIndexNodeDto> getApiDocIndexTree(GtDocumentRequestDto docReqDto) {
+    	List<GtDocumentDes> contentsList = gtDocumentDao.getContensByProject(docReqDto.getProjectId());
+    	boolean isTopIndex = null != docReqDto.getProjectId();
+    	List<ApiDocIndexNodeDto> resList = new ArrayList<>();
+    	ApiDocIndexNodeDto apiDoc = new ApiDocIndexNodeDto();
+    	if (isTopIndex) {
+    		for (GtDocumentDes elem : contentsList) {
+    			apiDoc.setText(elem.getDocTitle());
+    			apiDoc.setDocId(elem.getId());
+    			apiDoc.setProjectId(docReqDto.getProjectId());
+    			resList.add(apiDoc);
+    		}
+    	} else {
+    		Map<Integer, List<ApiDocIndexNodeDto>> map = new HashMap<>();
+    		for (GtDocumentDes elem : contentsList) {
+    			if (!map.containsKey(elem.getProjectId())) {
+    				map.put(elem.getProjectId(), new ArrayList<ApiDocIndexNodeDto>());
+    			}
+    			List<ApiDocIndexNodeDto> nodeDtoList = map.get(elem.getProjectId());
+    			apiDoc.setText(elem.getDocTitle());
+    			apiDoc.setDocId(elem.getId());
+    			apiDoc.setProjectId(elem.getProjectId());
+    			apiDoc.setProjectName(elem.getProjectName());
+    			nodeDtoList.add(apiDoc);
+    		}
+    		apiDoc.setProjectId(null);
+    		apiDoc.setProjectName(null);
+    		Set<Entry<Integer, List<ApiDocIndexNodeDto>>> indexSet = map.entrySet();
+    		for (Entry<Integer, List<ApiDocIndexNodeDto>> entry : indexSet) {
+    			List<ApiDocIndexNodeDto> value = entry.getValue();
+				apiDoc.setProjectId(entry.getKey());
+				apiDoc.setText(value.get(0).getProjectName());
+				apiDoc.setNodes(value);
+				resList.add(apiDoc);
+			}
+    	}
+    	
+    	return resList;
+    }
+    
     
     
     @RequestMapping("addDoc")
@@ -56,14 +111,14 @@ public class GtDocumentController {
             Model model,
             @RequestParam(required = true)String docTitle,
             @RequestParam(required=true) int productId) {
-        model.addAttribute("productId", productId);
+        /*model.addAttribute("productId", productId);
         GtDocumentDes doc = new GtDocumentDes();
         doc.setDocTitle(docTitle);
         doc.setProjectId(productId);
         model.addAttribute("docCatalogId", gtDocumentDao.insert(doc));
         
         List<GtDocumentDes> docList = gtDocumentDao.getContensByProject(productId);
-        model.addAttribute("docCatalogList", docList);
+        model.addAttribute("docCatalogList", docList);*/
         return "document/doc.edit";
     }
 
@@ -71,4 +126,5 @@ public class GtDocumentController {
     public String getContents(@RequestParam String projectId) {
         return "";
     }
+    
 }

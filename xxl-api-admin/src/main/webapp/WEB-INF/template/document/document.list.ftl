@@ -19,7 +19,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>文档管理<small>API管理平台</small></h1>
+            <h1>项目文档<small>API管理平台</small></h1>
         </section>
 
         <section class="content">
@@ -74,6 +74,9 @@
                 </div>
                 <!-- /.col -->
                 
+	        	<div class="btn-group" style="float: right; padding: 0px 20px 10px 0px">
+				  <button class="btn btn-warning btn-xs" id="editDoc">编辑</button>
+				</div>
                 <#--文档内容-->
                 <div class="col-md-9">
                     <div class="box box-primary">
@@ -84,7 +87,7 @@
                             <textarea style="display:none;" name="apidoc-md-markdown-doc"></textarea>
                         </div>
                         <#--标题栏-->
-                        <#--<div class="box-header with-border">
+                        <!--<div class="box-header with-border">
                             <h3 class="box-title">
                                 <#if groupId==-1>全部
                                 <#elseif groupId==0>默认分组
@@ -100,7 +103,7 @@
                                 |
                             </#if>
                             
-                            <button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open('${request.contextPath}/document/addPage?productId=${productId}')" >+新增接口</button>
+                            <button class="btn btn-info btn-xs" type="button" onclick="javascript:window.open('${request.contextPath}/document/addPage?productId=${productId}')" >+新增接口</button> -->
                             <!-- 发布接口 &ndash;&gt;
                             <button class="btn btn-info btn-xs" type="button" id="pubApi">+发布接口</button>
                             &nbsp;&nbsp;

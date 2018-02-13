@@ -56,7 +56,7 @@
 <#macro commonHeader>
 	<header class="main-header">
 		<a href="${request.contextPath}/" class="logo">
-			<span class="logo-mini"><b></b>XXL-GT</span>
+			<span class="logo-mini"><b></b>GT</span>
 			<span class="logo-lg"><b></b>API管理平台</span>
 		</a>
 		<nav class="navbar navbar-static-top" role="navigation">
@@ -98,11 +98,12 @@
 
 <#macro commonFooter >
 	<footer class="main-footer">
-        Powered by <b>XXL-API</b> 1.1
+        <b>GT-API-XXL</b> 1.0
 		<div class="pull-right hidden-xs">
             <strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
-                <a href="https://github.com/xuxueli/xxl-api" target="_blank" >github</a>&nbsp;
-                <a href="https://my.oschina.net/xuxueli/blog/873667" target="_blank" >oschina</a>
+                <a href="https://github.com/ljyhust" target="_blank" >github</a>&nbsp;
+                <a href="https://gitee.com/jeang" target="_blank" >gitee</a>&nbsp;
+                <a href="http://blog.csdn.net/ljyhust" target="_blank" >csdn</a>
             </strong><!-- All rights reserved. -->
 		</div>
 	</footer>

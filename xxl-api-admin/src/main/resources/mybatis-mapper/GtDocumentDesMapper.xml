@@ -9,6 +9,7 @@
 	    <result column="docContent" property="doc_content" />
 	    <result column="projectId" property="project_id" />
 	    <result column="status" property="status" />
+	    <result column="projectName" property="projectName" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -60,10 +61,15 @@
 	   WHERE id=#{id} AND status=1
 	</select>
 	
-	<select id="getContensByProject" parameterType="java.lang.Integer" resultMap="GtDocumentDes">
-	   SELECT id,doc_title 
-	   FROM gt_document_des 
-	   WHERE project_id=#{project_id} AND status=1
+	<select id="getContensByProject" resultMap="GtDocumentDes">
+	   SELECT doc.id, doc.doc_title, p.name AS projectName  
+	   FROM gt_document_des doc 
+	   INNER JOIN xxl_api_project p ON doc.project_id = p.id 
+	   WHERE doc.status = 1 
+	   <if test="_parameter != null">
+	   AND doc.project_id=#{projectId}
+	   </if>
+	   ORDER BY doc.project_id ASC;
 	</select>
 
 </mapper>
