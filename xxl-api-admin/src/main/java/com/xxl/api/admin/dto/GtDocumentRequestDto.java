@@ -6,23 +6,23 @@ public class GtDocumentRequestDto implements Serializable{
 
 	private static final long serialVersionUID = 3064258717105874575L;
 
-	private Integer projectId;
+	private String productId;
 	
-	private Integer docId;
+	private String docId;
 
-	public Integer getProjectId() {
-		return projectId;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProjectId(Integer projectId) {
-		this.projectId = projectId;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
-	public Integer getDocId() {
+	public String getDocId() {
 		return docId;
 	}
 
-	public void setDocId(Integer docId) {
+	public void setDocId(String docId) {
 		this.docId = docId;
 	}
 	

@@ -5,9 +5,9 @@
 	
 	<resultMap id="GtDocumentDes" type="com.xxl.api.admin.core.model.GtDocumentDes" >
 		<result column="id" property="id" />
-		<result column="docTitle" property="doc_title" />
-	    <result column="docContent" property="doc_content" />
-	    <result column="projectId" property="project_id" />
+		<result column="doc_title" property="docTitle" />
+	    <result column="doc_content" property="docContent" />
+	    <result column="project_id" property="projectId" />
 	    <result column="status" property="status" />
 	    <result column="projectName" property="projectName" />
 	</resultMap>

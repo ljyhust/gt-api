@@ -12,7 +12,7 @@ import com.xxl.api.admin.core.model.GtDocumentDes;
  */
 public interface GtDocumentDesDao {
     
-    public Integer insert(GtDocumentDes doc);
+    public int insert(GtDocumentDes doc);
     
     public void updateById(GtDocumentDes doc);
     

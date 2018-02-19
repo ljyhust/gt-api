@@ -1,5 +1,6 @@
 $(function() {
 
+	console.log("projectId : " + $("#projectId").val());
 	apiContentShow($("#projectId").val());
 
     
@@ -332,10 +333,11 @@ $(function() {
  * ajax请求接口文档
  */
 var apiContentShow = function(projectId){
+	console.log("projectId:" + projectId);
 	$.ajax({
 		url : base_url+"/gt-document/getDocIndex",
 		type : "post",
-		data : {"projectId":projectId},
+		data : {"productId":projectId},
 		success : function(resData){
 			console.log(resData);
             $('#contentsTree').treeview({
@@ -349,7 +351,9 @@ var apiContentShow = function(projectId){
                         //删除之前的div缓存
                         $('#apidoc-md-view').empty();
                         //currentId = node.id;
-                        apiView(node.id);
+                        console.log(node);
+                        console.log(node.id);
+                        apiView(node.docId);
                     }
                 }
             });
@@ -358,14 +362,15 @@ var apiContentShow = function(projectId){
 }
 
 var apiView = function(id){
-    $.get( baseUrl + "/gt-document/queryApiHtml",
+	console.log("id is : " + id);
+    $.get( base_url + "/gt-document/getDocMd",
         {
-            id : id
+            "docId" : id
         },
         function(markdown) {
-            $('#apidoc-name h3 font').text(markdown.data[0].name);
+            $('#apidoc-name h3 font').text(markdown.gtDoc.docTitle);
 			editormdView = editormd.markdownToHTML("apidoc-md-view", {
-				markdown        : markdown.data[0].pageContext ,//+ "\r\n" + $("#append-test").text(),
+				markdown        : markdown.gtDoc.docContent ,//+ "\r\n" + $("#append-test").text(),
 				htmlDecode      : "style,script,iframe",  // you can filter tags decode
 				tocm            : true,    // Using [TOCM]
 				emoji           : true,

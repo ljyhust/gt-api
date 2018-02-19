@@ -30,7 +30,7 @@
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <h3 class="box-title">文档目录</h3>
-                            <input type="hidden" name="projectId" value="${productId}" >
+                            <input type="hidden" id="projectId" name="projectId" value="${productId}" >
                             <div class="box-tools">
                                 <button type="button" class="btn btn-box-tool" id="addDoc" ><i class="fa fa-plus"></i></button>
                             </div>
@@ -322,6 +322,14 @@
 <!-- DataTables -->
 <script src="${request.contextPath}/static/plugins/jquery/jquery.validate.min.js"></script>
 <!-- moment -->
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/marked.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/prettify.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/raphael.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/underscore.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/sequence-diagram.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/flowchart.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/lib/jquery.flowchart.min.js"></script>
+<script src="${request.contextPath}/static/plugins/editor.md-1.5.0/main/editormd.min.js"></script>
 <script src="${request.contextPath}/static/js/document.list.1.js"></script>
 </body>
 </html>

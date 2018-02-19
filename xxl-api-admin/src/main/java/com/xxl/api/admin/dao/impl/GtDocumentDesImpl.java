@@ -17,7 +17,7 @@ public class GtDocumentDesImpl implements GtDocumentDesDao{
     public SqlSessionTemplate sqlSessionTemplate;
     
     @Override
-    public Integer insert(GtDocumentDes doc) {
+    public int insert(GtDocumentDes doc) {
         return sqlSessionTemplate.insert("GtDocumentDesMapper.add", doc);
         
     }

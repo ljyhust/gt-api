@@ -37,6 +37,7 @@
                     </div>
                 </div>
                 <input type="hidden" name="projectId" value="${productId}"/>
+                <input type="hidden" name="docId" value="${docId}">
         	</form>
         </section>
         <!-- /.content -->

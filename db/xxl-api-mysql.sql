@@ -121,7 +121,7 @@ CREATE TABLE `gt_document_des` (
   `doc_title` varchar(128) NOT NULL,
   `doc_content` mediumtext,
   `project_id` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL COMMENT '状态',
+  `status` tinyint(4) DEFAULT '1' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

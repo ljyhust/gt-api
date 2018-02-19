@@ -9,12 +9,15 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xxl.api.admin.controller.annotation.PermessionLimit;
+import com.xxl.api.admin.core.model.GtDocEditRequestDto;
 import com.xxl.api.admin.core.model.GtDocumentDes;
 import com.xxl.api.admin.core.model.XxlApiProject;
 import com.xxl.api.admin.dao.GtDocumentDesDao;
@@ -64,16 +67,18 @@ public class GtDocumentController {
      */
     @RequestMapping("getDocIndex")
     @ResponseBody
+    @PermessionLimit(limit=false)
     public List<ApiDocIndexNodeDto> getApiDocIndexTree(GtDocumentRequestDto docReqDto) {
-    	List<GtDocumentDes> contentsList = gtDocumentDao.getContensByProject(docReqDto.getProjectId());
-    	boolean isTopIndex = null != docReqDto.getProjectId();
+    	boolean isTopIndex = null != docReqDto.getProductId();
+    	List<GtDocumentDes> contentsList = gtDocumentDao.getContensByProject(
+    			isTopIndex ? new Integer(docReqDto.getProductId()) : null);
     	List<ApiDocIndexNodeDto> resList = new ArrayList<>();
-    	ApiDocIndexNodeDto apiDoc = new ApiDocIndexNodeDto();
     	if (isTopIndex) {
     		for (GtDocumentDes elem : contentsList) {
+    			ApiDocIndexNodeDto apiDoc = new ApiDocIndexNodeDto();
     			apiDoc.setText(elem.getDocTitle());
     			apiDoc.setDocId(elem.getId());
-    			apiDoc.setProjectId(docReqDto.getProjectId());
+    			apiDoc.setProjectId(new Integer(docReqDto.getProductId()));
     			resList.add(apiDoc);
     		}
     	} else {
@@ -83,14 +88,14 @@ public class GtDocumentController {
     				map.put(elem.getProjectId(), new ArrayList<ApiDocIndexNodeDto>());
     			}
     			List<ApiDocIndexNodeDto> nodeDtoList = map.get(elem.getProjectId());
+    			ApiDocIndexNodeDto apiDoc = new ApiDocIndexNodeDto();
     			apiDoc.setText(elem.getDocTitle());
     			apiDoc.setDocId(elem.getId());
     			apiDoc.setProjectId(elem.getProjectId());
     			apiDoc.setProjectName(elem.getProjectName());
     			nodeDtoList.add(apiDoc);
     		}
-    		apiDoc.setProjectId(null);
-    		apiDoc.setProjectName(null);
+    		ApiDocIndexNodeDto apiDoc = new ApiDocIndexNodeDto();
     		Set<Entry<Integer, List<ApiDocIndexNodeDto>>> indexSet = map.entrySet();
     		for (Entry<Integer, List<ApiDocIndexNodeDto>> entry : indexSet) {
     			List<ApiDocIndexNodeDto> value = entry.getValue();
@@ -111,8 +116,8 @@ public class GtDocumentController {
             Model model,
             @RequestParam(required = true)String docTitle,
             @RequestParam(required=true) int productId) {
-        /*model.addAttribute("productId", productId);
-        GtDocumentDes doc = new GtDocumentDes();
+        model.addAttribute("productId", productId);
+        /*GtDocumentDes doc = new GtDocumentDes();
         doc.setDocTitle(docTitle);
         doc.setProjectId(productId);
         model.addAttribute("docCatalogId", gtDocumentDao.insert(doc));
@@ -121,10 +126,48 @@ public class GtDocumentController {
         model.addAttribute("docCatalogList", docList);*/
         return "document/doc.edit";
     }
+    
+    /**
+     * 保存文档
+     * @param docTitle
+     * @param projectId
+     * @param docMd
+     * @return
+     */
+    @RequestMapping("saveDocMd")
+    @ResponseBody
+    public Map<String, Object> saveDocMd(GtDocEditRequestDto requestDto) {
+    	// projectId
+    	GtDocumentDes doc = new GtDocumentDes();
+    	doc.setDocTitle(requestDto.getDocTitle());
+    	doc.setDocContent(requestDto.getDocMd());
+    	doc.setProjectId(new Integer(requestDto.getProjectId()));
+    	
+    	Map<String, Object> resMap = new HashMap<>();
+    	if (StringUtils.isBlank(requestDto.getDocId())) {
+    		gtDocumentDao.insert(doc);
+    		// 返回doc_id
+    		resMap.put("docId", doc.getId());
+    	} else {
+	    	doc.setId(new Integer(requestDto.getDocId()));
+	    	gtDocumentDao.updateById(doc);
+	    	resMap.put("docId", requestDto.getDocId());
+    	}
+        return resMap;
+    }
 
-    @RequestMapping("/getContents")
-    public String getContents(@RequestParam String projectId) {
-        return "";
+    /**
+     * 获取文档
+     * @param projectId
+     * @return
+     */
+    @RequestMapping("/getDocMd")
+    @ResponseBody
+    public Map<String, Object> getContents(@RequestParam int docId) {
+    	GtDocumentDes gtDoc = gtDocumentDao.selectById(docId);
+    	Map<String, Object> resMap = new HashMap<String, Object>();
+    	resMap.put("gtDoc", gtDoc);
+        return resMap;
     }
     
 }

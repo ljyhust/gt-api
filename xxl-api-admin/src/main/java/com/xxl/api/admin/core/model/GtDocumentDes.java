@@ -33,14 +33,14 @@ public class GtDocumentDes implements Serializable{
     }
 
     public String getDocTitle() {
-        return docTitle;
-    }
+		return docTitle;
+	}
 
-    public void setDocTitle(String docTitle) {
-        this.docTitle = docTitle;
-    }
+	public void setDocTitle(String docTitle) {
+		this.docTitle = docTitle;
+	}
 
-    public String getDocContent() {
+	public String getDocContent() {
         return docContent;
     }
 

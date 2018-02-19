@@ -17,14 +17,21 @@ $(function() {
         },
         toolbarHandlers : {
              save : function(cm, iconJquery, cursor, selection) {
-            	 var saveDocMd = $("#docEditForm").validate({
-            		 submitHandler : function(form) {
-            			 var docMd = remarkEditor.getMarkdown();
-            			 var docParam = $("#docEditForm").serialize();
-            			 docParam += '&' + $.param({"docMd":docMd});
-            			 // ajax请求保存数据
-            		 }
-            	 });
+    			 var docMd = remarkEditor.getMarkdown();
+    			 var docParam = $("#docEditForm").serialize();
+    			 docParam += '&' + $.param({"docMd":docMd});
+    			 // ajax请求保存数据
+    			 $.ajax({
+    				 url : base_url + "/gt-document/saveDocMd",
+    				 type : "post",
+    				 data : docParam,
+    				 success : function(resData) {
+    					 //document.location = base_url + "";
+    					 // 填充docId
+    					 console.log(resData);
+    					 $("input[name='docId']").val(resData.docId);
+    				 }
+    			 });
             }
         },
         //图标文本提示
