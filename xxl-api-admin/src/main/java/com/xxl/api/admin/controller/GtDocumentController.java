@@ -42,17 +42,19 @@ public class GtDocumentController {
 	private GtDocumentDesDao gtDocumentDao;
     
     @RequestMapping
-    public String index(Model model, @RequestParam(required = false, defaultValue = "0") int productId) {
+    @PermessionLimit(limit=false)
+    public String index(Model model, @RequestParam(required = false) Integer productId) {
 
         // 项目id
-        model.addAttribute("productId", productId);
-        // 项目
- 		XxlApiProject xxlApiProject = xxlApiProjectDao.load(productId);
- 		if (xxlApiProject == null) {
- 			throw new RuntimeException("系统异常，项目ID非法");
- 		}
- 		model.addAttribute("productId", productId);
- 		model.addAttribute("project", xxlApiProject);
+    	if (null != productId) {
+    		model.addAttribute("productId", productId);
+    		// 项目
+    		XxlApiProject xxlApiProject = xxlApiProjectDao.load(productId);
+    		if (xxlApiProject == null) {
+    			throw new RuntimeException("系统异常，项目ID非法");
+    		}
+    		model.addAttribute("project", xxlApiProject);
+    	}
  		//目录
  		List<GtDocumentDes> contentList = gtDocumentDao.getContensByProject(productId);
  		model.addAttribute("docCatalogList", contentList);
@@ -69,9 +71,9 @@ public class GtDocumentController {
     @ResponseBody
     @PermessionLimit(limit=false)
     public List<ApiDocIndexNodeDto> getApiDocIndexTree(GtDocumentRequestDto docReqDto) {
-    	boolean isTopIndex = null != docReqDto.getProductId();
+    	boolean isTopIndex = !StringUtils.isBlank((docReqDto.getProductId()));
     	List<GtDocumentDes> contentsList = gtDocumentDao.getContensByProject(
-    			isTopIndex ? new Integer(docReqDto.getProductId()) : null);
+    			isTopIndex ? Integer.valueOf(docReqDto.getProductId()) : null);
     	List<ApiDocIndexNodeDto> resList = new ArrayList<>();
     	if (isTopIndex) {
     		for (GtDocumentDes elem : contentsList) {
@@ -114,9 +116,12 @@ public class GtDocumentController {
     @RequestMapping("addDoc")
     public String edtiDoc(
             Model model,
-            @RequestParam(required = true)String docTitle,
-            @RequestParam(required=true) int productId) {
-        model.addAttribute("productId", productId);
+            @RequestParam(required = false)String docTitle,
+            @RequestParam(required=false) Integer productId,
+            @RequestParam(required=false) Integer docId) {
+    	if (null != productId) {
+    		model.addAttribute("productId", productId);
+    	}
         /*GtDocumentDes doc = new GtDocumentDes();
         doc.setDocTitle(docTitle);
         doc.setProjectId(productId);
@@ -124,6 +129,9 @@ public class GtDocumentController {
         
         List<GtDocumentDes> docList = gtDocumentDao.getContensByProject(productId);
         model.addAttribute("docCatalogList", docList);*/
+        if (null != docId) {
+        	model.addAttribute("docId", docId);
+        }
         return "document/doc.edit";
     }
     
@@ -139,6 +147,7 @@ public class GtDocumentController {
     public Map<String, Object> saveDocMd(GtDocEditRequestDto requestDto) {
     	// projectId
     	GtDocumentDes doc = new GtDocumentDes();
+    	
     	doc.setDocTitle(requestDto.getDocTitle());
     	doc.setDocContent(requestDto.getDocMd());
     	doc.setProjectId(new Integer(requestDto.getProjectId()));
@@ -149,7 +158,7 @@ public class GtDocumentController {
     		// 返回doc_id
     		resMap.put("docId", doc.getId());
     	} else {
-	    	doc.setId(new Integer(requestDto.getDocId()));
+	    	doc.setId(Integer.valueOf(requestDto.getDocId()));
 	    	gtDocumentDao.updateById(doc);
 	    	resMap.put("docId", requestDto.getDocId());
     	}
@@ -163,6 +172,7 @@ public class GtDocumentController {
      */
     @RequestMapping("/getDocMd")
     @ResponseBody
+    @PermessionLimit(limit=false)
     public Map<String, Object> getContents(@RequestParam int docId) {
     	GtDocumentDes gtDoc = gtDocumentDao.selectById(docId);
     	Map<String, Object> resMap = new HashMap<String, Object>();

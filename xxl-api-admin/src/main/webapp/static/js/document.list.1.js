@@ -1,8 +1,8 @@
 $(function() {
 
-	console.log("projectId : " + $("#projectId").val());
+	//console.log("projectId : " + $("#projectId").val());
 	apiContentShow($("#projectId").val());
-
+	var localDocId = null;
     
 	/**
 	 * 新增，分组
@@ -363,6 +363,7 @@ var apiContentShow = function(projectId){
 
 var apiView = function(id){
 	console.log("id is : " + id);
+	localDocId = id;
     $.get( base_url + "/gt-document/getDocMd",
         {
             "docId" : id
@@ -380,5 +381,9 @@ var apiView = function(id){
 				sequenceDiagram : true,  // 默认不解析
 			});
 		});
-}
+	}
 
+$("#editDoc").click(function(){
+	console.log("editDoc");
+	document.location = base_url + '/gt-document/addDoc' + '?docId=' + localDocId;
+});
